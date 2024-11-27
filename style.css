@@ -43,44 +43,25 @@ nav ul li a {
     text-decoration: none;
 }
 
-/* Seções */
-main {
+/* Seções de apps */
+.app-section {
     padding: 2rem 0;
-}
-
-h2 {
     text-align: center;
-    margin-bottom: 1rem;
-}
-
-/* Cards de apps */
-.app-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-}
-
-.app-card {
-    background: #fff;
-    border: 1px solid #ddd;
+    background-color: #fff;
+    margin: 2rem 0;
     border-radius: 5px;
-    padding: 1rem;
-    text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.app-card img {
-    max-width: 100%;
-    border-radius: 5px;
-}
-
-.app-card h3 {
-    margin: 0.5rem 0;
+.app-section img {
+    max-width: 300px;
+    margin-bottom: 1rem;
+    border-radius: 10px;
 }
 
 .button {
     display: inline-block;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     padding: 0.5rem 1rem;
     background: #007BFF;
     color: #fff;
