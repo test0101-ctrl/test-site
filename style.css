@@ -6,6 +6,7 @@ body {
     background-color: #f4f4f9;
     color: #333;
     line-height: 1.6;
+    transition: all 0.3s ease;
 }
 
 .container {
@@ -15,11 +16,18 @@ body {
     overflow: hidden;
 }
 
+/* Modo Escuro */
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #f4f4f9;
+}
+
 /* Cabeçalho */
 header {
     background: #007BFF;
     color: #fff;
     padding: 1rem 0;
+    position: relative;
 }
 
 header h1 {
@@ -43,19 +51,33 @@ nav ul li a {
     text-decoration: none;
 }
 
-/* Seções de apps */
-.app-section {
-    padding: 2rem 0;
-    text-align: center;
-    background-color: #fff;
-    margin: 2rem 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+/* Botões de alternância */
+.toggle-buttons {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
 }
 
-.app-section img {
+.toggle-buttons button {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #fff;
+    transition: transform 0.3s;
+}
+
+.toggle-buttons button:hover {
+    transform: scale(1.2);
+}
+
+/* Seções */
+.container img {
     max-width: 300px;
-    margin-bottom: 1rem;
+    margin: 1rem auto;
+    display: block;
     border-radius: 10px;
 }
 
@@ -81,4 +103,19 @@ footer {
     text-align: center;
     padding: 1rem 0;
     margin-top: 2rem;
+}
+
+/* Visualização Mobile */
+body.mobile-view header,
+body.mobile-view nav ul {
+    text-align: left;
+}
+
+body.mobile-view .container {
+    width: 100%;
+    padding: 0 1rem;
+}
+
+body.mobile-view header {
+    font-size: 0.9rem;
 }
