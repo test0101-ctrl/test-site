@@ -33,12 +33,12 @@
             width: 100%;
             height: 5px;
             background-color: rgba(0, 0, 0, 0.2);
+            z-index: 10; /* Para ficar acima da imagem */
         }
         .progress-bar {
             height: 100%;
-            width: 0%;
+            width: 0;
             background-color: #4caf50;
-            transition: width linear;
         }
 
         /* Estilo para o seletor de idioma */
@@ -106,11 +106,11 @@
     </footer>
 
     <script>
-        // Variáveis do carrossel
+        // Configurações do carrossel
         let currentIndex = 0;
         const images = document.querySelectorAll('.carousel img');
         const progressBar = document.getElementById('progress-bar');
-        const transitionTime = 2000; // Tempo total para a troca de imagem (em milissegundos)
+        const transitionTime = 3000; // Tempo total para a troca de imagem (em milissegundos)
 
         function showNextImage() {
             // Atualiza a imagem visível
@@ -123,10 +123,10 @@
             setTimeout(() => {
                 progressBar.style.transition = `width ${transitionTime / 1000}s linear`;
                 progressBar.style.width = '100%';
-            }, 50);
+            }, 50); // Pequeno atraso para reiniciar a animação
         }
 
-        // Inicia a barra de progresso junto com o carrossel
+        // Inicia o carrossel e a barra de progresso
         setInterval(showNextImage, transitionTime);
         progressBar.style.transition = `width ${transitionTime / 1000}s linear`;
         progressBar.style.width = '100%';
