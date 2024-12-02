@@ -112,24 +112,28 @@
         const progressBar = document.getElementById('progress-bar');
         const transitionTime = 3000; // Tempo total para a troca de imagem (em milissegundos)
 
+        function updateProgressBar() {
+            // Reinicia a barra de progresso e anima até 100% em cada ciclo
+            progressBar.style.transition = "none";
+            progressBar.style.width = "0%";
+            setTimeout(() => {
+                progressBar.style.transition = `width ${transitionTime}ms linear`;
+                progressBar.style.width = "100%";
+            }, 50); // Pequeno atraso para reiniciar a animação
+        }
+
         function showNextImage() {
             // Atualiza a imagem visível
             images[currentIndex].classList.remove('active');
             currentIndex = (currentIndex + 1) % images.length;
             images[currentIndex].classList.add('active');
-            
-            // Reinicia a barra de progresso
-            progressBar.style.width = '0%';
-            setTimeout(() => {
-                progressBar.style.transition = `width ${transitionTime / 1000}s linear`;
-                progressBar.style.width = '100%';
-            }, 50); // Pequeno atraso para reiniciar a animação
+            // Atualiza a barra de progresso
+            updateProgressBar();
         }
 
         // Inicia o carrossel e a barra de progresso
         setInterval(showNextImage, transitionTime);
-        progressBar.style.transition = `width ${transitionTime / 1000}s linear`;
-        progressBar.style.width = '100%';
+        updateProgressBar();
 
         // Script para troca de idioma
         const translations = {
