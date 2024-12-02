@@ -3,8 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App 1 - Meu Portfólio</title>
+    <title>Genesis App - Meu Portfólio</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos adicionais para o carrossel */
+        .carousel {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .carousel img {
+            width: 100%;
+            display: none;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .carousel img.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -24,20 +44,22 @@
 
     <main>
         <section class="container">
-            <h2>App 1</h2>
-            <div class="app-details">
-                <img src="https://via.placeholder.com/400x300" alt="App 1 Screenshot">
-                <p>Genesis é um jogo de cartas baseado em turnos que combina estratégia, habilidade e criatividade. Os jogadores constroem seus baralhos personalizados e enfrentam adversários em batalhas táticas, onde cada decisão conta.
-                </div>
-                <p>Mecânica única: Utilize cartas de ataque, defesa e habilidades especiais para dominar o campo de batalha.
-                </div>
-                <p>Construção de Baralhos: Personalize sua estratégia escolhendo entre diversas cartas com poderes únicos.
-                </div>
-                <p>Modos de Jogo: Enfrente oponentes em partidas solo, multiplayer online ou desafie a IA em uma campanha emocionante.
-                </div>Arte Imersiva: Gráficos vibrantes e uma trilha sonora envolvente criam uma experiência memorável.
-                <p>Prepare-se para testar sua inteligência e superar seus rivais no mundo fascinante de Genesis!
+            <h2>App 1: Genesis</h2>
+            
+            <!-- Carrossel de Imagens -->
+            <div class="carousel">
+                <img src="https://via.placeholder.com/1920x1080" alt="Screenshot 1" class="active">
+                <img src="https://via.placeholder.com/500x300?text=Screenshot+2" alt="Screenshot 2">
+                <img src="https://via.placeholder.com/960x540?text=Screenshot+3" alt="Screenshot 3">
+            </div>
 
-.</p>
+            <div class="app-details">
+                <p>Genesis é um jogo de cartas baseado em turnos que combina estratégia, habilidade e criatividade. Os jogadores constroem seus baralhos personalizados e enfrentam adversários em batalhas táticas, onde cada decisão conta.</p>
+                <p><strong>Mecânica única:</strong> Utilize cartas de ataque, defesa e habilidades especiais para dominar o campo de batalha.</p>
+                <p><strong>Construção de Baralhos:</strong> Personalize sua estratégia escolhendo entre diversas cartas com poderes únicos.</p>
+                <p><strong>Modos de Jogo:</strong> Enfrente oponentes em partidas solo, multiplayer online ou desafie a IA em uma campanha emocionante.</p>
+                <p><strong>Arte Imersiva:</strong> Gráficos vibrantes e uma trilha sonora envolvente criam uma experiência memorável.</p>
+                <p>Prepare-se para testar sua inteligência e superar seus rivais no mundo fascinante de Genesis!</p>
                 <a href="https://play.google.com" target="_blank" class="button">Ver na Play Store</a>
             </div>
         </section>
@@ -49,6 +71,19 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Script para o carrossel automático
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.carousel img');
+
+        function showNextImage() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+        }
+
+        // Mudar imagem a cada 3,5 segundos
+        setInterval(showNextImage, 3500);
+    </script>
 </body>
 </html>
