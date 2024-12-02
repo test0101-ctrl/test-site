@@ -24,19 +24,34 @@
             display: block;
             opacity: 1;
         }
+
+        /* Estilo para o seletor de idioma */
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .language-switcher button {
+            padding: 5px 10px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>App 2</h1>
-            <div class="toggle-buttons">
+            <h1 id="app-title">App 2</h1>
+            <div class="toggle-buttons language-switcher">
+                <!-- Botões de troca de idioma -->
+                <button id="lang-pt">🇧🇷 PT</button>
+                <button id="lang-en">🇬🇧 EN</button>
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html">Início</a></li>
-                    <li><a href="app1.html">Genesis App</a></li>
-                    <li><a href="privacy-policy.html">Política de Privacidade</a></li>
+                    <li><a href="index.html" id="nav-home">Início</a></li>
+                    <li><a href="app1.html" id="nav-app1">Genesis App</a></li>
+                    <li><a href="privacy-policy.html" id="nav-privacy">Política de Privacidade</a></li>
                 </ul>
             </nav>
         </div>
@@ -44,7 +59,7 @@
 
     <main>
         <section class="container">
-            <h2>App 2</h2>
+            <h2 id="app-subtitle">App 2</h2>
 
             <!-- Carrossel de Imagens -->
             <div class="carousel">
@@ -54,21 +69,21 @@
             </div>
 
             <div class="app-details">
-                <p>App 2 é ideal para resolver ABC. Ele oferece ferramentas poderosas para ajudá-lo no seu dia a dia.</p>
-                <p><strong>Principais características:</strong></p>
-                <ul>
+                <p id="app-description">App 2 é ideal para resolver ABC. Ele oferece ferramentas poderosas para ajudá-lo no seu dia a dia.</p>
+                <p><strong id="features-title">Principais características:</strong></p>
+                <ul id="features-list">
                     <li>Solução inovadora para tarefas diárias.</li>
                     <li>Interface amigável e fácil de usar.</li>
                     <li>Funcionalidades avançadas para maximizar sua produtividade.</li>
                 </ul>
-                <a href="https://play.google.com" target="_blank" class="button">Ver na Play Store</a>
+                <a href="https://play.google.com" target="_blank" class="button" id="play-store-link">Ver na Play Store</a>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Meu Portfólio de Apps. Todos os direitos reservados.</p>
+            <p id="footer-text">&copy; 2024 Meu Portfólio de Apps. Todos os direitos reservados.</p>
         </div>
     </footer>
 
@@ -83,8 +98,69 @@
             images[currentIndex].classList.add('active');
         }
 
-        // Mudar imagem a cada 3 segundos
         setInterval(showNextImage, 3000);
+
+        // Script para troca de idioma
+        const translations = {
+            pt: {
+                appTitle: "App 2",
+                appSubtitle: "App 2",
+                appDescription: "App 2 é ideal para resolver ABC. Ele oferece ferramentas poderosas para ajudá-lo no seu dia a dia.",
+                featuresTitle: "Principais características:",
+                featuresList: [
+                    "Solução inovadora para tarefas diárias.",
+                    "Interface amigável e fácil de usar.",
+                    "Funcionalidades avançadas para maximizar sua produtividade."
+                ],
+                playStoreLink: "Ver na Play Store",
+                navHome: "Início",
+                navApp1: "Genesis App",
+                navPrivacy: "Política de Privacidade",
+                footerText: "&copy; 2024 Meu Portfólio de Apps. Todos os direitos reservados."
+            },
+            en: {
+                appTitle: "App 2",
+                appSubtitle: "App 2",
+                appDescription: "App 2 is ideal for solving ABC. It offers powerful tools to assist you in your daily tasks.",
+                featuresTitle: "Key Features:",
+                featuresList: [
+                    "Innovative solution for daily tasks.",
+                    "User-friendly and easy-to-use interface.",
+                    "Advanced features to maximize your productivity."
+                ],
+                playStoreLink: "View on Play Store",
+                navHome: "Home",
+                navApp1: "Genesis App",
+                navPrivacy: "Privacy Policy",
+                footerText: "&copy; 2024 My App Portfolio. All rights reserved."
+            }
+        };
+
+        function switchLanguage(lang) {
+            const t = translations[lang];
+            document.getElementById("app-title").textContent = t.appTitle;
+            document.getElementById("app-subtitle").textContent = t.appSubtitle;
+            document.getElementById("app-description").textContent = t.appDescription;
+            document.getElementById("features-title").textContent = t.featuresTitle;
+
+            const featuresList = document.getElementById("features-list");
+            featuresList.innerHTML = ""; // Limpa a lista
+            t.featuresList.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                featuresList.appendChild(li);
+            });
+
+            document.getElementById("play-store-link").textContent = t.playStoreLink;
+            document.getElementById("nav-home").textContent = t.navHome;
+            document.getElementById("nav-app1").textContent = t.navApp1;
+            document.getElementById("nav-privacy").textContent = t.navPrivacy;
+            document.getElementById("footer-text").innerHTML = t.footerText;
+        }
+
+        // Adiciona eventos aos botões
+        document.getElementById("lang-pt").addEventListener("click", () => switchLanguage("pt"));
+        document.getElementById("lang-en").addEventListener("click", () => switchLanguage("en"));
     </script>
 </body>
 </html>
