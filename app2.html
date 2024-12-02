@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App 2 - Meu Portfólio</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos adicionais para o carrossel */
+        .carousel {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .carousel img {
+            width: 100%;
+            display: none;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .carousel img.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -15,7 +35,7 @@
             <nav>
                 <ul>
                     <li><a href="index.html">Início</a></li>
-                    <li><a href="app1.html">App 1</a></li>
+                    <li><a href="app1.html">Genesis App</a></li>
                     <li><a href="privacy-policy.html">Política de Privacidade</a></li>
                 </ul>
             </nav>
@@ -25,9 +45,22 @@
     <main>
         <section class="container">
             <h2>App 2</h2>
+
+            <!-- Carrossel de Imagens -->
+            <div class="carousel">
+                <img src="https://via.placeholder.com/500x300" alt="Screenshot 1" class="active">
+                <img src="https://via.placeholder.com/500x300?text=Screenshot+2" alt="Screenshot 2">
+                <img src="https://via.placeholder.com/500x300?text=Screenshot+3" alt="Screenshot 3">
+            </div>
+
             <div class="app-details">
-                <img src="https://via.placeholder.com/400x300" alt="App 2 Screenshot">
                 <p>App 2 é ideal para resolver ABC. Ele oferece ferramentas poderosas para ajudá-lo no seu dia a dia.</p>
+                <p><strong>Principais características:</strong></p>
+                <ul>
+                    <li>Solução inovadora para tarefas diárias.</li>
+                    <li>Interface amigável e fácil de usar.</li>
+                    <li>Funcionalidades avançadas para maximizar sua produtividade.</li>
+                </ul>
                 <a href="https://play.google.com" target="_blank" class="button">Ver na Play Store</a>
             </div>
         </section>
@@ -39,6 +72,19 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Script para o carrossel automático
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.carousel img');
+
+        function showNextImage() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+        }
+
+        // Mudar imagem a cada 3 segundos
+        setInterval(showNextImage, 3000);
+    </script>
 </body>
 </html>
