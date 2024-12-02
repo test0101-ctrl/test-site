@@ -97,8 +97,8 @@
             currentIndex = (currentIndex + 1) % images.length;
             images[currentIndex].classList.add('active');
         }
-
-        setInterval(showNextImage, 3000);
+        // set image transition time 2 sec
+        setInterval(showNextImage, 2000);
 
         // Script para troca de idioma
         const translations = {
