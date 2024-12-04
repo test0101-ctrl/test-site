@@ -24,6 +24,42 @@
             display: block;
             opacity: 1;
         }
+
+        /* Indicadores de posição do carrossel */
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            gap: 8px;
+        }
+        .carousel-indicators div {
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .carousel-indicators .active {
+            background-color: #4caf50;
+        }
+
+        /* Estilo para bandeiras */
+        .toggle-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .toggle-buttons img {
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -31,6 +67,8 @@
         <div class="container">
             <h1>Genesis App</h1>
             <div class="toggle-buttons">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1200px-Flag_of_Brazil.svg.png" alt="PT" id="lang-pt">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png" alt="EN" id="lang-en">
             </div>
             <nav>
                 <ul>
@@ -51,6 +89,13 @@
                 <img src="https://via.placeholder.com/1920x1080" alt="Screenshot 1" class="active">
                 <img src="https://via.placeholder.com/500x300?text=Screenshot+2" alt="Screenshot 2">
                 <img src="https://via.placeholder.com/960x540?text=Screenshot+3" alt="Screenshot 3">
+
+                <!-- Indicadores de posição -->
+                <div class="carousel-indicators">
+                    <div class="active"></div>
+                    <div></div>
+                    <div></div>
+                </div>
             </div>
 
             <div class="app-details">
@@ -75,12 +120,30 @@
         // Script para o carrossel automático
         let currentIndex = 0;
         const images = document.querySelectorAll('.carousel img');
+        const indicators = document.querySelectorAll('.carousel-indicators div');
+
+        function updateCarousel() {
+            // Remove a classe 'active' de todos os itens
+            images.forEach(img => img.classList.remove('active'));
+            indicators.forEach(ind => ind.classList.remove('active'));
+
+            // Adiciona a classe 'active' no item atual
+            images[currentIndex].classList.add('active');
+            indicators[currentIndex].classList.add('active');
+        }
 
         function showNextImage() {
-            images[currentIndex].classList.remove('active');
             currentIndex = (currentIndex + 1) % images.length;
-            images[currentIndex].classList.add('active');
+            updateCarousel();
         }
+
+        // Adiciona evento de clique aos indicadores
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
+        });
 
         // Mudar imagem a cada 3,5 segundos
         setInterval(showNextImage, 3500);
