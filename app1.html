@@ -6,59 +6,76 @@
     <title>Genesis App - Meu Portfólio</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Estilos adicionais para o carrossel */
+        /* Estilo básico */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Estilo para o carrossel com barra */
         .carousel {
             width: 100%;
-            max-width: 500px;
-            margin: 20px auto;
+            height: 300px;
             position: relative;
             overflow: hidden;
-            border-radius: 10px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
         }
         .carousel img {
             width: 100%;
-            display: none;
-            transition: opacity 0.5s ease-in-out;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease;
         }
         .carousel img.active {
-            display: block;
             opacity: 1;
         }
-
-        /* Indicadores de posição do carrossel */
-        .carousel-indicators {
-            display: flex;
-            justify-content: center;
+        .progress-bar {
             position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            gap: 8px;
-        }
-        .carousel-indicators div {
-            width: 10px;
-            height: 10px;
-            background-color: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        .carousel-indicators .active {
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 5px;
             background-color: #4caf50;
+            transition: width 3.5s linear;
         }
 
-        /* Estilo para bandeiras */
-        .toggle-buttons {
-            position: absolute;
-            top: 10px;
-            right: 10px;
+        /* Idioma */
+        .language-select {
+            float: right;
+            margin-top: -35px;
         }
-        .toggle-buttons img {
-            width: 30px;
-            height: 20px;
-            cursor: pointer;
-            margin-left: 10px;
-            border: 1px solid #ccc;
+        .language-select select {
+            padding: 5px;
             border-radius: 5px;
+            border: 1px solid #ccc;
         }
     </style>
 </head>
@@ -66,9 +83,11 @@
     <header>
         <div class="container">
             <h1 id="app-title">Genesis App</h1>
-            <div class="toggle-buttons">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1200px-Flag_of_Brazil.svg.png" alt="PT" id="lang-pt">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png" alt="EN" id="lang-en">
+            <div class="language-select">
+                <select id="language">
+                    <option value="pt">Português</option>
+                    <option value="en">English</option>
+                </select>
             </div>
             <nav>
                 <ul>
@@ -84,18 +103,12 @@
         <section class="container">
             <h2 id="app-subtitle">App 1: Genesis</h2>
             
-            <!-- Carrossel de Imagens -->
+            <!-- Carrossel com barra de progresso -->
             <div class="carousel">
                 <img src="screenshot01.jpg" alt="Screenshot 1" class="active">
                 <img src="screenshot02.jpg" alt="Screenshot 2">
                 <img src="screenshot03.jpg" alt="Screenshot 3">
-
-                <!-- Indicadores de posição -->
-                <div class="carousel-indicators">
-                    <div class="active"></div>
-                    <div></div>
-                    <div></div>
-                </div>
+                <div class="progress-bar"></div>
             </div>
 
             <div class="app-details">
@@ -117,34 +130,22 @@
     </footer>
 
     <script>
-        // Configurações do carrossel
-        let currentIndex = 0;
+        // Configuração do carrossel com barra de progresso
         const images = document.querySelectorAll('.carousel img');
-        const indicators = document.querySelectorAll('.carousel-indicators div');
-
-        function updateCarousel() {
-            images.forEach(img => img.classList.remove('active'));
-            indicators.forEach(ind => ind.classList.remove('active'));
-            images[currentIndex].classList.add('active');
-            indicators[currentIndex].classList.add('active');
-        }
+        const progressBar = document.querySelector('.progress-bar');
+        let currentIndex = 0;
 
         function showNextImage() {
+            images[currentIndex].classList.remove('active');
             currentIndex = (currentIndex + 1) % images.length;
-            updateCarousel();
+            images[currentIndex].classList.add('active');
+            progressBar.style.width = '0%';
+            setTimeout(() => progressBar.style.width = '100%', 100);
         }
-
-        // Atualiza ao clicar no indicador
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                currentIndex = index;
-                updateCarousel();
-            });
-        });
 
         setInterval(showNextImage, 3500);
 
-        // Tradução de idioma
+        // Tradução de idiomas
         const translations = {
             pt: {
                 appTitle: "Genesis App",
@@ -178,6 +179,8 @@
             }
         };
 
+        const languageSelect = document.getElementById('language');
+
         function switchLanguage(lang) {
             const t = translations[lang];
             document.getElementById("app-title").textContent = t.appTitle;
@@ -195,8 +198,10 @@
             document.getElementById("footer-text").innerHTML = t.footerText;
         }
 
-        document.getElementById("lang-pt").addEventListener("click", () => switchLanguage("pt"));
-        document.getElementById("lang-en").addEventListener("click", () => switchLanguage("en"));
+        languageSelect.addEventListener('change', () => {
+            const selectedLanguage = languageSelect.value;
+            switchLanguage(selectedLanguage);
+        });
     </script>
 </body>
 </html>
