@@ -65,16 +65,16 @@
 <body>
     <header>
         <div class="container">
-            <h1>Genesis App</h1>
+            <h1 id="app-title">Genesis App</h1>
             <div class="toggle-buttons">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1200px-Flag_of_Brazil.svg.png" alt="PT" id="lang-pt">
                 <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png" alt="EN" id="lang-en">
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html">Início</a></li>
-                    <li><a href="app2.html">App 2</a></li>
-                    <li><a href="privacy-policy.html">Política de Privacidade</a></li>
+                    <li><a href="index.html" id="nav-home">Início</a></li>
+                    <li><a href="app2.html" id="nav-app2">App 2</a></li>
+                    <li><a href="privacy-policy.html" id="nav-privacy">Política de Privacidade</a></li>
                 </ul>
             </nav>
         </div>
@@ -82,13 +82,13 @@
 
     <main>
         <section class="container">
-            <h2>App 1: Genesis</h2>
+            <h2 id="app-subtitle">App 1: Genesis</h2>
             
             <!-- Carrossel de Imagens -->
             <div class="carousel">
-                <img src="https://via.placeholder.com/1920x1080" alt="Screenshot 1" class="active">
-                <img src="https://via.placeholder.com/500x300?text=Screenshot+2" alt="Screenshot 2">
-                <img src="https://via.placeholder.com/960x540?text=Screenshot+3" alt="Screenshot 3">
+                <img src="screenshot01.jpg" alt="Screenshot 1" class="active">
+                <img src="screenshot02.jpg" alt="Screenshot 2">
+                <img src="screenshot03.jpg" alt="Screenshot 3">
 
                 <!-- Indicadores de posição -->
                 <div class="carousel-indicators">
@@ -99,35 +99,32 @@
             </div>
 
             <div class="app-details">
-                <p>Genesis é um jogo de cartas baseado em turnos que combina estratégia, habilidade e criatividade. Os jogadores constroem seus baralhos personalizados e enfrentam adversários em batalhas táticas, onde cada decisão conta.</p>
-                <p><strong>Mecânica única:</strong> Utilize cartas de ataque, defesa e habilidades especiais para dominar o campo de batalha.</p>
-                <p><strong>Construção de Baralhos:</strong> Personalize sua estratégia escolhendo entre diversas cartas com poderes únicos.</p>
-                <p><strong>Modos de Jogo:</strong> Enfrente oponentes em partidas solo, multiplayer online ou desafie a IA em uma campanha emocionante.</p>
-                <p><strong>Arte Imersiva:</strong> Gráficos vibrantes e uma trilha sonora envolvente criam uma experiência memorável.</p>
-                <p>Prepare-se para testar sua inteligência e superar seus rivais no mundo fascinante de Genesis!</p>
-                <a href="https://play.google.com" target="_blank" class="button">Ver na Play Store</a>
+                <p id="app-description">Genesis é um jogo de cartas baseado em turnos que combina estratégia, habilidade e criatividade. Os jogadores constroem seus baralhos personalizados e enfrentam adversários em batalhas táticas, onde cada decisão conta.</p>
+                <p><strong id="mechanics-title">Mecânica única:</strong> Utilize cartas de ataque, defesa e habilidades especiais para dominar o campo de batalha.</p>
+                <p><strong id="deck-title">Construção de Baralhos:</strong> Personalize sua estratégia escolhendo entre diversas cartas com poderes únicos.</p>
+                <p><strong id="modes-title">Modos de Jogo:</strong> Enfrente oponentes em partidas solo, multiplayer online ou desafie a IA em uma campanha emocionante.</p>
+                <p><strong id="art-title">Arte Imersiva:</strong> Gráficos vibrantes e uma trilha sonora envolvente criam uma experiência memorável.</p>
+                <p id="challenge-text">Prepare-se para testar sua inteligência e superar seus rivais no mundo fascinante de Genesis!</p>
+                <a href="https://play.google.com" target="_blank" class="button" id="play-store-link">Ver na Play Store</a>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Meu Portfólio de Apps. Todos os direitos reservados.</p>
+            <p id="footer-text">&copy; 2024 Meu Portfólio de Apps. Todos os direitos reservados.</p>
         </div>
     </footer>
 
     <script>
-        // Script para o carrossel automático
+        // Configurações do carrossel
         let currentIndex = 0;
         const images = document.querySelectorAll('.carousel img');
         const indicators = document.querySelectorAll('.carousel-indicators div');
 
         function updateCarousel() {
-            // Remove a classe 'active' de todos os itens
             images.forEach(img => img.classList.remove('active'));
             indicators.forEach(ind => ind.classList.remove('active'));
-
-            // Adiciona a classe 'active' no item atual
             images[currentIndex].classList.add('active');
             indicators[currentIndex].classList.add('active');
         }
@@ -137,7 +134,7 @@
             updateCarousel();
         }
 
-        // Adiciona evento de clique aos indicadores
+        // Atualiza ao clicar no indicador
         indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => {
                 currentIndex = index;
@@ -145,8 +142,61 @@
             });
         });
 
-        // Mudar imagem a cada 3,5 segundos
         setInterval(showNextImage, 3500);
+
+        // Tradução de idioma
+        const translations = {
+            pt: {
+                appTitle: "Genesis App",
+                appSubtitle: "App 1: Genesis",
+                appDescription: "Genesis é um jogo de cartas baseado em turnos que combina estratégia, habilidade e criatividade...",
+                mechanicsTitle: "Mecânica única:",
+                deckTitle: "Construção de Baralhos:",
+                modesTitle: "Modos de Jogo:",
+                artTitle: "Arte Imersiva:",
+                challengeText: "Prepare-se para testar sua inteligência e superar seus rivais no mundo fascinante de Genesis!",
+                playStoreLink: "Ver na Play Store",
+                navHome: "Início",
+                navApp2: "App 2",
+                navPrivacy: "Política de Privacidade",
+                footerText: "&copy; 2024 Meu Portfólio de Apps. Todos os direitos reservados."
+            },
+            en: {
+                appTitle: "Genesis App",
+                appSubtitle: "App 1: Genesis",
+                appDescription: "Genesis is a turn-based card game that combines strategy, skill, and creativity...",
+                mechanicsTitle: "Unique Mechanics:",
+                deckTitle: "Deck Building:",
+                modesTitle: "Game Modes:",
+                artTitle: "Immersive Art:",
+                challengeText: "Get ready to test your wits and outsmart your rivals in the fascinating world of Genesis!",
+                playStoreLink: "View on Play Store",
+                navHome: "Home",
+                navApp2: "App 2",
+                navPrivacy: "Privacy Policy",
+                footerText: "&copy; 2024 My App Portfolio. All rights reserved."
+            }
+        };
+
+        function switchLanguage(lang) {
+            const t = translations[lang];
+            document.getElementById("app-title").textContent = t.appTitle;
+            document.getElementById("app-subtitle").textContent = t.appSubtitle;
+            document.getElementById("app-description").textContent = t.appDescription;
+            document.getElementById("mechanics-title").textContent = t.mechanicsTitle;
+            document.getElementById("deck-title").textContent = t.deckTitle;
+            document.getElementById("modes-title").textContent = t.modesTitle;
+            document.getElementById("art-title").textContent = t.artTitle;
+            document.getElementById("challenge-text").textContent = t.challengeText;
+            document.getElementById("play-store-link").textContent = t.playStoreLink;
+            document.getElementById("nav-home").textContent = t.navHome;
+            document.getElementById("nav-app2").textContent = t.navApp2;
+            document.getElementById("nav-privacy").textContent = t.navPrivacy;
+            document.getElementById("footer-text").innerHTML = t.footerText;
+        }
+
+        document.getElementById("lang-pt").addEventListener("click", () => switchLanguage("pt"));
+        document.getElementById("lang-en").addEventListener("click", () => switchLanguage("en"));
     </script>
 </body>
 </html>
