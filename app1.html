@@ -33,7 +33,7 @@
             width: 100%;
             height: 5px;
             background-color: rgba(0, 0, 0, 0.2);
-            z-index: 10; /* Para ficar acima da imagem */
+            z-index: 10; /* Mantém acima da imagem */
         }
         .progress-bar {
             height: 100%;
@@ -48,9 +48,9 @@
             <h1>Genesis App</h1>
             <nav>
                 <ul>
-                    <li><a href="index.html">Início</a></li>
-                    <li><a href="app2.html">App 2</a></li>
-                    <li><a href="privacy-policy.html">Política de Privacidade</a></li>
+                    <li><a href="index.html" class="nav-link">Início</a></li>
+                    <li><a href="app2.html" class="nav-link">App 2</a></li>
+                    <li><a href="privacy-policy.html" class="nav-link">Política de Privacidade</a></li>
                 </ul>
             </nav>
         </div>
@@ -72,11 +72,12 @@
 
             <div class="app-details">
                 <p>Genesis é um jogo de cartas baseado em turnos que combina estratégia, habilidade e criatividade. Os jogadores constroem seus baralhos personalizados e enfrentam adversários em batalhas táticas, onde cada decisão conta.</p>
-                <p><strong>Mecânica única:</strong> Utilize cartas de ataque, defesa e habilidades especiais para dominar o campo de batalha.</p>
-                <p><strong>Construção de Baralhos:</strong> Personalize sua estratégia escolhendo entre diversas cartas com poderes únicos.</p>
-                <p><strong>Modos de Jogo:</strong> Enfrente oponentes em partidas solo, multiplayer online ou desafie a IA em uma campanha emocionante.</p>
-                <p><strong>Arte Imersiva:</strong> Gráficos vibrantes e uma trilha sonora envolvente criam uma experiência memorável.</p>
-                <p>Prepare-se para testar sua inteligência e superar seus rivais no mundo fascinante de Genesis!</p>
+                <ul>
+                    <li><strong>Mecânica única:</strong> Utilize cartas de ataque, defesa e habilidades especiais.</li>
+                    <li><strong>Construção de Baralhos:</strong> Personalize sua estratégia com diversas cartas.</li>
+                    <li><strong>Modos de Jogo:</strong> Partidas solo, multiplayer ou contra IA.</li>
+                    <li><strong>Arte Imersiva:</strong> Gráficos vibrantes e trilha sonora envolvente.</li>
+                </ul>
                 <a href="https://play.google.com" target="_blank" class="button">Ver na Play Store</a>
             </div>
         </section>
@@ -89,32 +90,30 @@
     </footer>
 
     <script>
-        // Script para o carrossel automático com barra de progresso
-        let currentIndex = 0;
+        // Script do carrossel com barra de progresso
         const images = document.querySelectorAll('.carousel img');
         const progressBar = document.getElementById('progress-bar');
-        const transitionTime = 3500; // Tempo total para a troca de imagem (em milissegundos)
+        const transitionTime = 3500; // 3.5 segundos para troca
+
+        let currentIndex = 0;
 
         function updateProgressBar() {
-            // Reinicia a barra de progresso e anima até 100% em cada ciclo
             progressBar.style.transition = "none";
             progressBar.style.width = "0%";
             setTimeout(() => {
                 progressBar.style.transition = `width ${transitionTime}ms linear`;
                 progressBar.style.width = "100%";
-            }, 50); // Pequeno atraso para reiniciar a animação
+            }, 50);
         }
 
         function showNextImage() {
-            // Atualiza a imagem visível
             images[currentIndex].classList.remove('active');
             currentIndex = (currentIndex + 1) % images.length;
             images[currentIndex].classList.add('active');
-            // Atualiza a barra de progresso
             updateProgressBar();
         }
 
-        // Inicia o carrossel e a barra de progresso
+        // Inicia o carrossel
         setInterval(showNextImage, transitionTime);
         updateProgressBar();
     </script>
