@@ -49,6 +49,7 @@ nav ul li {
 nav ul li a {
     color: #fff;
     text-decoration: none;
+    transition: color 0.3s ease, font-weight 0.3s ease;
 }
 
 /* Botões de alternância */
@@ -123,6 +124,6 @@ body.mobile-view header {
 /* Estilo para o link ativo */
 .nav-link.active {
     font-weight: bold;
-    color: #ff9800; /* Escolha uma cor de destaque */
+    color: #ff9800; /* Cor de destaque para a página ativa */
     text-decoration: underline;
 }
