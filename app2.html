@@ -6,7 +6,7 @@
     <title>App 2 - Meu Portfólio</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Estilos adicionais */
+        /* Estilos adicionais para o carrossel */
         .carousel {
             width: 100%;
             max-width: 500px;
@@ -33,6 +33,7 @@
             width: 100%;
             height: 5px;
             background-color: rgba(0, 0, 0, 0.2);
+            z-index: 10; /* Para ficar acima da imagem */
         }
         .progress-bar {
             height: 100%;
@@ -40,7 +41,7 @@
             background-color: #4caf50;
         }
 
-        /* Troca de idioma */
+        /* Estilo para o seletor de idioma */
         .language-switcher {
             position: absolute;
             top: 10px;
@@ -57,7 +58,7 @@
     <header>
         <div class="container">
             <h1 id="app-title">App 2</h1>
-            <div class="language-switcher">
+            <div class="toggle-buttons language-switcher">
                 <button id="lang-pt">🇧🇷 PT</button>
                 <button id="lang-en">🇬🇧 EN</button>
             </div>
@@ -74,17 +75,20 @@
     <main>
         <section class="container">
             <h2 id="app-subtitle">App 2</h2>
-            
+
+            <!-- Carrossel de Imagens -->
             <div class="carousel">
                 <div class="progress-bar-container">
                     <div class="progress-bar" id="progress-bar"></div>
                 </div>
                 <img src="https://via.placeholder.com/500x300" alt="Screenshot 1" class="active">
                 <img src="https://via.placeholder.com/500x300?text=Screenshot+2" alt="Screenshot 2">
+                <img src="https://via.placeholder.com/500x300?text=Screenshot+3" alt="Screenshot 3">
             </div>
 
             <div class="app-details">
                 <p id="app-description">App 2 é ideal para resolver ABC. Ele oferece ferramentas poderosas para ajudá-lo no seu dia a dia.</p>
+                <p><strong id="features-title">Principais características:</strong></p>
                 <ul id="features-list">
                     <li>Solução inovadora para tarefas diárias.</li>
                     <li>Interface amigável e fácil de usar.</li>
@@ -102,16 +106,96 @@
     </footer>
 
     <script>
+        // Configurações do carrossel
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.carousel img');
+        const progressBar = document.getElementById('progress-bar');
+        const transitionTime = 3000; // Tempo total para a troca de imagem (em milissegundos)
+
+        function updateProgressBar() {
+            // Reinicia a barra de progresso e anima até 100% em cada ciclo
+            progressBar.style.transition = "none";
+            progressBar.style.width = "0%";
+            setTimeout(() => {
+                progressBar.style.transition = width ${transitionTime}ms linear;
+                progressBar.style.width = "100%";
+            }, 50); // Pequeno atraso para reiniciar a animação
+        }
+
+        function showNextImage() {
+            // Atualiza a imagem visível
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+            // Atualiza a barra de progresso
+            updateProgressBar();
+        }
+
+        // Inicia o carrossel e a barra de progresso
+        setInterval(showNextImage, transitionTime);
+        updateProgressBar();
+
+        // Script para troca de idioma
         const translations = {
             pt: {
                 appTitle: "App 2",
                 appSubtitle: "App 2",
-                appDescription: "App 2 é ideal para resolver ABC.",
-                featuresList: ["Tarefa 1", "Tarefa 2"],
+                appDescription: "App 2 é ideal para resolver ABC. Ele oferece ferramentas poderosas para ajudá-lo no seu dia a dia.",
+                featuresTitle: "Principais características:",
+                featuresList: [
+                    "Solução inovadora para tarefas diárias.",
+                    "Interface amigável e fácil de usar.",
+                    "Funcionalidades avançadas para maximizar sua produtividade."
+                ],
+                playStoreLink: "Ver na Play Store",
+                navHome: "Início",
+                navApp1: "Genesis App",
+                navPrivacy: "Política de Privacidade",
+                footerText: "&copy; 2024 Meu Portfólio de Apps. Todos os direitos reservados."
             },
+            en: {
+                appTitle: "App 2",
+                appSubtitle: "App 2",
+                appDescription: "App 2 is ideal for solving ABC. It offers powerful tools to assist you in your daily tasks.",
+                featuresTitle: "Key Features:",
+                featuresList: [
+                    "Innovative solution for daily tasks.",
+                    "User-friendly and easy-to-use interface.",
+                    "Advanced features to maximize your productivity."
+                ],
+                playStoreLink: "View on Play Store",
+                navHome: "Home",
+                navApp1: "Genesis App",
+                navPrivacy: "Privacy Policy",
+                footerText: "&copy; 2024 My App Portfolio. All rights reserved."
+            }
         };
 
-        // Idem ao anterior...
+        function switchLanguage(lang) {
+            const t = translations[lang];
+            document.getElementById("app-title").textContent = t.appTitle;
+            document.getElementById("app-subtitle").textContent = t.appSubtitle;
+            document.getElementById("app-description").textContent = t.appDescription;
+            document.getElementById("features-title").textContent = t.featuresTitle;
+
+            const featuresList = document.getElementById("features-list");
+            featuresList.innerHTML = ""; // Limpa a lista
+            t.featuresList.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                featuresList.appendChild(li);
+            });
+
+            document.getElementById("play-store-link").textContent = t.playStoreLink;
+            document.getElementById("nav-home").textContent = t.navHome;
+            document.getElementById("nav-app1").textContent = t.navApp1;
+            document.getElementById("nav-privacy").textContent = t.navPrivacy;
+            document.getElementById("footer-text").innerHTML = t.footerText;
+        }
+
+        // Adiciona eventos aos botões
+        document.getElementById("lang-pt").addEventListener("click", () => switchLanguage("pt"));
+        document.getElementById("lang-en").addEventListener("click", () => switchLanguage("en"));
     </script>
 </body>
 </html>
